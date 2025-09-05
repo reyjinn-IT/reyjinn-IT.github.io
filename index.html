@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Only One 💙</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Decorative Particles Background -->
+  <div class="bg-particles" id="bgParticles" aria-hidden="true"></div>
+
+  <!-- Opening Screen -->
+  <section class="opening" id="opening" aria-label="Pembuka">
+    <div class="opening-card">
+      <h1 class="title">Halo, bu boss 💙</h1>
+      <p class="subtitle">Sedikit hal usil yang gue lakuin di waktu gabut. Semoga jadi hiburan kecil buat kamu. Kamu itu favorit aku—selalu. ✨</p>
+
+      <div class="datetime" aria-live="polite">
+        <span class="chip" id="todayText">Senin, 1 Jan 2025</span>
+        <span class="chip" id="clockText">00:00</span>
+        <span class="chip" id="greetText">Selamat Pagi 🌞</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="btnStart" aria-label="Mulai sekarang">Mulai Sekarang</button>
+      </div>
+    </div>
+
+    <!-- preload audio element (akan diputar saat klik tombol) -->
+    <audio id="bgm" preload="auto" loop>
+      <source src="audio/audio.mp3" type="audio/wav" />
+    </audio>
+  </section>
+
+  <!-- Stage / Slider wrapper -->
+  <main class="stage" aria-label="Galeri"> 
+    <section class="slider" id="slider">
+      <!-- Navigation buttons -->
+      <button class="nav-btn nav-prev" id="btnPrev" aria-label="Sebelumnya" title="Sebelumnya">&#10094;</button>
+      <button class="nav-btn nav-next" id="btnNext" aria-label="Berikutnya" title="Berikutnya">&#10095;</button>
+
+      <!-- Cards -->
+      <article class="card active" data-title="Aku" aria-roledescription="slide">
+        <figure class="media">
+          <img src="https://images.unsplash.com/photo-1494790108755-2616c64c8c6e?w=400&h=600&fit=crop" alt="Foto kamu 1" loading="eager" />
+        </figure>
+        <div class="content">
+          <h2>Aku</h2>
+          <p>Aku butuh kamu seperti jantung membutuhkan detik. Aku menginginkanmu seperti gurun yang menanti hujan.</p>
+        </div>
+      </article>
+
+      <article class="card right" data-title="Sayang" aria-roledescription="slide">
+        <figure class="media">
+          <img src="gambar/gambar1.jpg" alt="Foto kamu 2" loading="lazy" />
+        </figure>
+        <div class="content">
+          <h2>Sayang</h2>
+          <p>Aku menyayangimu bukan karena siapa dirimu, tapi karena apa yang kurasakan saat bersamamu.</p>
+        </div>
+      </article>
+
+      <article class="card" data-title="Kamu" aria-roledescription="slide">
+        <figure class="media">
+          <img src="gambar/gambar2.jpg" alt="Foto kamu 3" loading="lazy" />
+        </figure>
+        <div class="content">
+          <h2>Kamu</h2>
+          <p>Aku ingin hadir di tiap mimpi indahmu. Dan saat terbangun, aku tetap merindukanmu.</p>
+        </div>
+      </article>
+
+      <article class="card" data-title="Syarla Ananda" aria-roledescription="slide">
+        <figure class="media">
+          <img src="gambar/gambar3.jpg" alt="Foto kamu 4" loading="lazy" />
+        </figure>
+        <div class="content">
+          <h2>Syarla Ananda</h2>
+          <p>Jangan lupa istirahat ya, sayangku. I love you—selalu. 🌙💙</p>
+        </div>
+      </article>
+
+      <!-- Indicators (dots) -->
+      <div class="indicators" id="indicators" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>

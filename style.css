@@ -1,0 +1,202 @@
+/* =========================
+   ROOT + RESET
+   ========================= */
+:root{
+  --blue-1:#0f2027;   /* deep blue */
+  --blue-2:#203a43;   /* teal-ish */
+  --blue-3:#2c5364;   /* slate blue */
+  --primary:#1e90ff;  /* dodgerblue */
+  --primary-2:#4682b4;/* steelblue */
+  --glass: rgba(255,255,255,0.08);
+  --glass-2: rgba(255,255,255,0.14);
+  --text-soft:#cfe9ff;
+  --shadow: 0 10px 28px rgba(0,0,0,.35);
+  --radius: 22px;
+  --elev: 0 18px 48px rgba(0,0,0,.35);
+  --card-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:#fff;
+  background: linear-gradient(135deg,var(--blue-1),var(--blue-2),var(--blue-3));
+  overflow:hidden; /* kita kontrol scroll manual */
+}
+
+a{color:inherit}
+button{font-family:inherit}
+
+/* =========================
+   GLOBAL DECORATIONS
+   ========================= */
+.bg-particles{
+  position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;
+}
+.particle{
+  position:absolute; bottom:-10px; width:6px; height:6px; border-radius:50%;
+  background:var(--primary); opacity:.75; filter:drop-shadow(0 0 6px rgba(30,144,255,.7));
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp{
+  from{ transform:translateY(0) scale(1); opacity:.9; }
+  to{   transform:translateY(-110vh) scale(.6); opacity:0; }
+}
+
+/* =========================
+   OPENING SCREEN (Now as Card)
+   ========================= */
+.opening{
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:24px; z-index:10;
+  transition: opacity .8s ease;
+}
+.opening.hide{ opacity:0; pointer-events:none; }
+
+.opening-card {
+  background: var(--glass);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(10px);
+  padding: 32px 24px;
+  max-width: min(92vw, 480px);
+  width: 100%;
+  position: relative;
+  border: 1px solid rgba(255,255,255,.12);
+  z-index: 11;
+}
+
+.opening .title{
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight:700; letter-spacing:.5px; margin: 0 0 10px 0;
+  text-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+
+.opening .subtitle{ 
+  margin: 0 auto 18px; max-width:720px; color:var(--text-soft); font-weight:300; line-height:1.6;
+}
+
+.opening .datetime{
+  display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap;
+  font-size:.95rem; color:#d7edff; opacity:.9; margin-bottom:16px;
+}
+.chip{ padding:6px 12px; border-radius:999px; background:var(--glass-2); box-shadow:var(--shadow); }
+
+.actions{ display:flex; gap:12px; align-items:center; justify-content:center; margin-top:4px; }
+
+.btn{
+  appearance:none; border:none; cursor:pointer; padding:12px 26px; border-radius:999px;
+  font-weight:700; letter-spacing:.3px; color:#fff; background:var(--primary);
+  box-shadow:0 8px 22px rgba(30,144,255,.45); transition:.25s ease transform, .25s ease background;
+  position: relative; z-index: 12;
+}
+.btn:hover{ background:var(--primary-2); transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); }
+
+.btn-outline{
+  background:transparent; border:2px solid rgba(255,255,255,.5); color:#eaf6ff;
+  box-shadow:none;
+}
+.btn-outline:hover{ background:rgba(255,255,255,.12); }
+
+/* Music control (opening & slider) */
+.music-ctrl{ display:flex; align-items:center; gap:10px; padding:8px 12px; border-radius:999px; background:var(--glass);
+  box-shadow:var(--shadow); }
+.music-ctrl button{ padding:8px 12px; border-radius:999px; border:none; cursor:pointer; background:var(--primary); color:#fff; font-weight:600; }
+.music-ctrl button:hover{ background:var(--primary-2); }
+.music-ctrl input[type="range"]{ accent-color:var(--primary); }
+
+/* =========================
+   SLIDER (STACKED CARDS)
+   ========================= */
+.stage{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:1; pointer-events:none;
+}
+
+.slider{
+  position:relative; width:min(92vw, 460px); height:min(84vh, 640px); pointer-events:auto;
+}
+
+.card{
+  position:absolute; inset:auto; left:50%; top:50%; width:88%; height:88%; transform:translate(-50%,-50%) scale(.86);
+  background:var(--glass); border-radius: var(--radius); box-shadow: var(--elev); backdrop-filter: blur(10px);
+  transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s ease; opacity:.55;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.card::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; border:1px solid rgba(255,255,255,.12); pointer-events:none;
+}
+
+.card.active{ transform: translate(-50%,-50%) scale(1); opacity:1; z-index:3; }
+.card.left{   transform: translate(calc(-50% - 120%), -50%) scale(.86); z-index:2; }
+.card.right{  transform: translate(calc(-50% + 120%), -50%) scale(.86); z-index:2; }
+
+/* REAL CENTER: Media container */
+.card .media {
+  /* width: 100%; */
+  height: 250px; /* bikin fix height biar rata */
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;     
+  justify-content: center;
+  border-radius: 15px; /* sama kayak contoh kedua */
+  margin-bottom: 10px;
+}
+
+.card .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* ini kunci biar center */
+  display: block;
+}
+
+
+
+.card .content{ flex:1; padding:16px 18px 18px; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+.card .content h2{ margin:0 0 8px; font-size: clamp(18px, 3.8vw, 22px); font-weight:700; }
+.card .content p{ margin:0; color:#dff1ff; line-height:1.6; }
+
+.nav-btn{ position:absolute; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%;
+  display:grid; place-items:center; background: rgba(0,0,0,.28); color:#bfe0ff; font-size:28px; cursor:pointer;
+  user-select:none; transition:.25s ease background; border:1px solid rgba(255,255,255,.12);
+}
+.nav-btn:hover{ background: rgba(255,255,255,.18); }
+.nav-prev{ left:-64px; }
+.nav-next{ right:-64px; }
+
+/* Indicators */
+.indicators{ position:absolute; bottom:-36px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
+.dot{ width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.35); transition:.25s linear all; }
+.dot.active{ background:#fff; transform:scale(1.25); box-shadow:0 0 10px rgba(255,255,255,.5); }
+
+/* Music floating widget inside slider */
+.float-music{ position:absolute; top:-54px; right:0; display:flex; align-items:center; gap:10px; }
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 560px){
+  .nav-prev{ left:-48px; } 
+  .nav-next{ right:-48px; }
+  .slider{ width:min(94vw, 420px); height:min(82vh, 600px); }
+  .card .media { height: 62%; } /* lebih tinggi di tablet/HP medium */
+  .opening .subtitle{ padding:0 8px; }
+  .opening-card { padding: 24px 20px; }
+}
+
+@media (max-width: 420px){
+  .nav-prev{ left:-42px; } 
+  .nav-next{ right:-42px; }
+  .slider{ width:92vw; height:78vh; }
+  .card .media { height: 66%; } /* lebih tinggi di HP kecil */
+  .card .content{ padding:14px 14px 16px; }
+  .music-ctrl{ transform: scale(.94); }
+  .opening-card { padding: 20px 16px; }
+}
+
+/* Accessibility focus */
+.nav-btn:focus-visible, .btn:focus-visible{ outline: 3px solid rgba(255,255,255,.65); outline-offset: 2px; }
