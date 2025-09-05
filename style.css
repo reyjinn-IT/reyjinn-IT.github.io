@@ -56,17 +56,65 @@ button{font-family:inherit}
 .opening.hide{ opacity:0; pointer-events:none; }
 
 .opening-card {
-  background: var(--glass);
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* gradasi biru */
   border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(10px);
-  padding: 32px 24px;
-  max-width: min(92vw, 480px);
-  width: 100%;
+  padding: 36px 26px;
+  color: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
   position: relative;
-  border: 1px solid rgba(255,255,255,.12);
+  overflow: hidden;
   z-index: 11;
 }
+
+/* Tambahin glow tipis di pinggir */
+.opening-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* ketebalan border glow */
+  background: linear-gradient(135deg, rgba(255,255,255,.25), rgba(30,144,255,.6));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Judul biar lebih stand out */
+.opening-card .title {
+  font-size: clamp(30px, 6vw, 46px);
+  font-weight: 800;
+  letter-spacing: .5px;
+  margin-bottom: 12px;
+  text-shadow: 0 3px 14px rgba(0,0,0,.4);
+}
+
+/* Subtitle biar lebih lembut */
+.opening-card .subtitle {
+  color: #dceeff;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+/* Chip biar kontras */
+.opening-card .chip {
+  background: rgba(255,255,255,.15);
+  color: #e8f4ff;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,.25);
+}
+
+/* Tombol tetap biru terang */
+.opening-card .btn {
+  background: linear-gradient(135deg, #00aaff, #0066ff);
+  box-shadow: 0 8px 25px rgba(0,128,255,.45);
+}
+.opening-card .btn:hover {
+  background: linear-gradient(135deg, #3399ff, #005ce6);
+  transform: translateY(-2px) scale(1.03);
+}
+
 
 .opening .title{
   font-size: clamp(28px, 5vw, 44px);
